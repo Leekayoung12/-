@@ -4,32 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>homework</title>
+    <style>
+        table {
+            width: 50%;
+            text-align: center;
+            border-collapse: collapse;
+            padding: 20px;
+        }
+
+        th { 
+            font-size: 20px;
+            border: 1px solid black;
+        }
+
+        tr {
+           border: 1px solid black;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
+    <div class="wrap"></div>
     <script>
+        let txt = ''
+        const wrap = document.querySelector('.wrap')
         fetch('https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0')
         .then((response) => {
             return response.json()
         })
         .then((data) => {
-            document.write("<table>")
-                document.write("<tr>")
-                    document.write("<th>timepoint</th>")
-                    document.write("<th>cloudcover</th>")
-                    document.write("<th>seeing</th>")
-                    document.write("<th>transparency</th>")
-                    document.write("<th>lifted_index</th>")
-                document.write("</tr>")
+            txt+="<table>"
+                txt+=`<tr>
+                    <th>timepoint</th>
+                    <th>cloudcover</th>
+                    <th>seeing</th>
+                    <th>transparency</th>
+                    <th>lifted_index</th>
+                </tr>`
                 for(let i=0; i< data.dataseries.length; i++){
-                    document.write("<tr>")
-                    document.write(`<td>${data.dataseries[i].timepoint}</td>`)
-                    document.write(`<td>${data.dataseries[i].cloudcover}</td>`)
-                    document.write(`<td>${data.dataseries[i].seeing}</td>`)
-                    document.write(`<td>${data.dataseries[i].transparency}</td>`)
-                    document.write(`<td>${data.dataseries[i].lifted_index}</td>`)
-                    document.write("</tr>")
+                    txt+=`
+                    <tr>
+                    <td>${data.dataseries[i].timepoint}</td>
+                    <td>${data.dataseries[i].cloudcover}</td>
+                    <td>${data.dataseries[i].seeing}</td>
+                    <td>${data.dataseries[i].transparency}</td>
+                    <td>${data.dataseries[i].lifted_index}</td>
+                    </tr>`
                 }
-            document.write("</table>")
+            txt+="</table>"
+            wrap.innerHTML=txt //wrap에 innerHTML을 txt로
         })
    
     </script>
