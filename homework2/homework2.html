@@ -4,44 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>과제2</title>
-    <style>
-        table {
-            width: 100%;
-            text-align: center;
-            border-collapse: collapse;
-            padding: 20px;
-        }
-
-        th { 
-            font-size: 18px;
-            border: 1px solid black;
-            background-color: antiquewhite;
-        }
-
-        tr {
-           border: 1px solid black;
-        }
-
-        td {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <h2>코로나19 예방접종 위탁의료기관 조회서비스</h2>
     <h3>null: 해당 조회일 휴무</h3>
     <div class="wrap"></div>
-    <div id="map" style="width:500px;height:400px;"></div>
+    <div id="map" style="width:60%; height:500px;"></div>  
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7ac23d90b38996543341af8b620f1289"></script>
-    <script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(37.566381, 126.977717),
-			level: 3
-		};
+    <script src="./map.js"></script>
 
-		var map = new kakao.maps.Map(container, options);
-	</script>
     <script>
         let txt = ''
         const wrap = document.querySelector('.wrap')
