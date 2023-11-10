@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h2>코로나19 예방접종 위탁의료기관 조회서비스</h2>
-    <h3>null: 해당 조회일 휴무</h3>
+    <h2 class="Jalnan">코로나19 예방접종 위탁의료기관 조회서비스</h2>
+    <img id="img" src="./images/illust.jpg" alt="img">
     <div class="wrap"></div>
-    <div id="map" style="width:80%; height:500px;"></div>  
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7ac23d90b38996543341af8b620f1289"></script>
+    <h3 class="Jalnan">📍 위치찾기</h3>
+    <div id="map-container">
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7ac23d90b38996543341af8b620f1289"></script>
+        <div id="map" style="width:80%; height:500px;"></div> 
+    </div>
     <script src="./map.js"></script>
 
     <script>
@@ -29,19 +32,21 @@
         .then((data) => {
             txt += "<table>"
                 txt += `<tr>
-                    <th>기관명</th>
-                    <th>기관주소</th>
-                    <th>기관전화번호</th>
-                    <th>아스트라제네카 백신 참여여부</th>
-                    <th>얀센 백신 참여여부</th>
-                    <th>모더나 백신 참여여부</th>
-                    <th>얀센 백신 참여여부</th>
-                    <th>노바백스 백신 참여여부</th>
-                    <th>화이자 백신 참여여부</th>
-                    <th>스카이코비원 백신 참여여부</th>
-                    <th>점심시작시간</th>
-                    <th>점심종료시간</th>
+                    <th rowspan="2">기관명</th>
+                    <th rowspan="2">기관주소</th>
+                    <th rowspan="2">기관전화번호</th>
+                    <th colspan="6">백신 참여여부</th>
+                    <th rowspan="2">점심시작시간</th>
+                    <th rowspan="2">점심종료시간</th>
                 </tr>`
+                txt += `<tr>          
+                    <th>아스트라제네카</th>
+                    <th>얀센</th>
+                    <th>모더나</th>
+                    <th>노바백스</th>
+                    <th>화이자</th>
+                    <th>스카이코비원</th>
+                    </tr>`
                 for(let i=0; i < data.data.length; i++) {
                     txt += `
                     <tr>
@@ -52,17 +57,45 @@
                         <td>${data.data[i].jsYn}</td>
                         <td>${data.data[i].mnYn}</td>
                         <td>${data.data[i].nvYn}</td>
-                        <td>${data.data[i].orgcd}</td>
                         <td>${data.data[i].pzYn}</td>
                         <td>${data.data[i].scYn}</td>
-                        <td>${data.data[i].lunchSttTm}</td>
-                        <td>${data.data[i].lunchEndTm}</td>
+                        <td>${data.data[i].lunchSttTm || ''}</td>
+                        <td>${data.data[i].lunchEndTm || ''}</td>
+                    </tr>`
+                }
+            txt+="</table>"
+            txt +=`<h3 class="Jalnan">💉 기관명 접종시간 (일요일/공란 휴무)</h3>`
+            txt += "<table>"
+                txt += `<tr>
+                    <th>기관명</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                    
+                </tr>`
+                function formatTime(start, end) {
+                    const startTime = start ? `시작:${start}<br>` : "";
+                    const endTime = end ? `종료:${end}` : "";
+                    return startTime + endTime;
+                }
+                   for(let i=0; i < data.data.length; i++) {
+                    txt += `
+                    <tr>
+                        <td>${data.data[i].orgnm || ""}</td>
+                        <td>${formatTime(data.data[i].monSttTm, data.data[i].monEndTm)}</td>
+                        <td>${formatTime(data.data[i].tueSttTm, data.data[i].tueEndTm)}</td>
+                        <td>${formatTime(data.data[i].wedSttTm, data.data[i].wedEndTm)}</td>
+                        <td>${formatTime(data.data[i].thuSttTm, data.data[i].thuEndTm)}</td>
+                        <td>${formatTime(data.data[i].friSttTm, data.data[i].friEndTm)}</td>
+                        <td>${formatTime(data.data[i].satSttTm, data.data[i].satEndTm)}</td>         
                     </tr>`
                 }
             txt+="</table>"
             wrap.innerHTML=txt
         })
-
-    </script>
+        </script>
 </body>
 </html>

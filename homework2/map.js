@@ -37,6 +37,7 @@ for (let i=0; i<data.length; i++){
     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 }
+map.setBounds(bounds) // 웹페이지 열었을 때 모든 마커가 한번에 보이도록 설정
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수
 function makeOverListener(map, marker, infowindow) {
