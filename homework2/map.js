@@ -20,14 +20,14 @@ let data = [
     [37.5841620014623, 127.0498578532334,'<div style="padding 5px">서울성심병원</div>'],
     [37.52795726897558, 126.86373559159597,'<div style="padding 5px">홍익병원</div>']
 ]
-let bounds = new kakao.maps.LatLngBounds();
+let bounds = new kakao.maps.LatLngBounds(); // 모든 마커를 포함하는 경계 영역으로 지도 이동
 
 for (let i=0; i<data.length; i++){
     let marker = new kakao.maps.Marker({
         position: new kakao.maps.LatLng(data[i][0], data[i][1]),
         map: map
     });
-    bounds.extend(new kakao.maps.LatLng(data[i][0], data[i][1]));
+    bounds.extend(new kakao.maps.LatLng(data[i][0], data[i][1])); //
 
     let infowindow = new kakao.maps.InfoWindow({
         content: data[i][2]
