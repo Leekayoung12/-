@@ -79,7 +79,7 @@
                 function formatTime(start, end) {
                     const startTime = start ? `시작:${start}<br>` : "";
                     const endTime = end ? `종료:${end}` : "";
-                    return startTime + endTime;
+                    return startTime + endTime; // start가 true값이면 시작반환,아니면 빈문자열 반환
                 }
                    for(let i=0; i < data.data.length; i++) {
                     txt += `
