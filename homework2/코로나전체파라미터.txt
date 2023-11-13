@@ -1,0 +1,38 @@
+azYn 아스트라제네카 백신 참여여부
+dywk 조회일자 요일
+friEndTm 금요일 접종종료시간(null일 경우 해당 요일 휴무)
+friSttTm 금요일 접종시작시간(null일 경우 해당 요일 휴무)
+hldyYn 조회일자 휴무일여부
+jsYn 얀센 백신 참여여부
+lunchEndTm 점심종료시간(null일 경우 해당 조회일 휴무)
+lunchSttTm 점심시작시간(null일 경우 해당 조회일 휴무)
+mnBa1Yn 모더나BA.1 백신 참여여부
+mnBa45Yn 모더나BA.4/5 백신 참여여부
+mnXbbYn 모더나XBB.1.5 백신 참여여부
+mnYn  모더나 백신 참여여부
+monEndTm 월요일 접종종료시간(null일 경우 해당 요일 휴무)
+monSttTm 월요일 접종시작시간(null일 경우 해당 요일 휴무)
+nvYn 노바백스 백신 참여여부
+orgTlno 기관전화번호
+orgZipaddr 기관주소
+orgcd 기관코드
+orgnm 기관명
+pzBa1Yn 화이자BA.1 백신 참여여부
+pzBa45Yn 화이자BA.4/5 백신 참여여부
+pzBabyYn 영유아용 화이자 백신 참여여부
+pzKidBa45Yn 소아용 화이자BA.4/5 백신 참여여부
+pzKidYn 소아용 화이자 백신 참여여부
+pzXbbYn 화이자XBB.1.5 백신 참여여부
+pzYn 화이자 백신 참여여부
+satEndTm 토요일 접종종료시간(null일 경우 해당 요일 휴무)
+satSttTm 토요일 접종시작시간(null일 경우 해당 요일 휴무)
+scYn 스카이코비원 백신 참여여부
+slrYmd 조회일자
+sunEndTm 일요일 접종종료시간(null일 경우 해당 요일 휴무)
+sunSttTm 일요일 접종시작시간(null일 경우 해당 요일 휴무)
+thuEndTm 목요일 접종종료시간(null일 경우 해당 요일 휴무)
+thuSttTm 목요일 접종시작시간(null일 경우 해당 요일 휴무)
+tueEndTm 화요일 접종종료시간(null일 경우 해당 요일 휴무)
+tueSttTm 화요일 접종시작시간(null일 경우 해당 요일 휴무)
+wedEndTm 수요일 접종종료시간(null일 경우 해당 요일 휴무)
+wedSttTm 수요일 접종시작시간(null일 경우 해당 요일 휴무)
