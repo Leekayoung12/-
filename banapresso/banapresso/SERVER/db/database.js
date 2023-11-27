@@ -8,7 +8,7 @@ export async function connectDB() {
         const connection = await Mongoose.connect(config.db.host, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            dbName: "banapress"
+            dbName: "homework"
         });
         db = connection.connection; // Assign the connection to db
         console.log("Connected to MongoDB");
@@ -19,5 +19,5 @@ export async function connectDB() {
 }
 
 export function getInformationCollection() {
-    return db.collection("information");
+    return db.collection("banapresso");
 }
