@@ -1,7 +1,8 @@
+
 // Kakao 지도 API 스크립트를 콜백과 함께 로드
 function loadKakaoMapsScript(callback) {
     const script = document.createElement('script');
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=9d08635edf4f597837f1f10007baeedd&libraries=services,clusterer,drawing';
+    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=9d08635edf4f597837f1f10007baeedd&libraries=services';
     script.async = true;
     script.onload = callback;
     document.head.appendChild(script);
@@ -38,15 +39,12 @@ function displayData(data) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded');
-    fetchData();
-});
+
 // Kakao 지도
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 6
+    level: 3
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소로부터 좌표를 얻어 지도에 표시하는 함수
@@ -86,7 +84,6 @@ async function getAddress(address, name, map) {
         console.error('getAddress 함수 오류:', error);
     }
 }
-
 
 
 //인포윈도우를 표시하는 클로저를 만드는 함수
