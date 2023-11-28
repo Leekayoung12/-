@@ -1,14 +1,14 @@
 // Kakao 지도 API 스크립트를 콜백과 함께 로드
 function loadKakaoMapsScript(callback) {
     const script = document.createElement('script');
-    script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=7ac23d90b38996543341af8b620f1289';
+    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=7ac23d90b38996543341af8b620f1289";
     script.onload = callback;
-    document.head.appendChild(script);
+    // document.head.appendChild(script);
 }
 async function fetchData() {
     try {
         // 데이터를 가져오기 전에 Kakao 지도 API 스크립트를 로드
-        await new Promise(resolve => loadKakaoMapsScript(resolve));
+        // await new Promise(resolve => loadKakaoMapsScript(resolve));
         const response = await fetch('http://localhost:8080/');
         const data = await response.json();
         console.log(data);
@@ -29,11 +29,11 @@ function displayData(data) {
     data.forEach(info => {
         const infoElement = document.createElement('div');
         infoElement.className = 'informationItem';
-        infoElement.innerHTML = `<img src="./매장이미지/${info.image}.jpg" alt="Image"><div><p><b>매장명:</b></p> <p>${info.name}</p><p><b>주소:</b><p> ${info.address}</p></div>`;
+        infoElement.innerHTML = `<img src="./매장이미지/${info.name}.jpg" alt="Image"><div><p><b>매장명:</b></p> <p>${info.name}</p><p><b>주소:</b><p> ${info.address}</p></div>`;
         container.appendChild(infoElement);
-        if (info.address) {
-            getAddress(info.address, info.name, map);
-        }
+        // if (info.address) {
+        //     getAddress(info.address, info.name, map);
+        // }
     });
 }
 
@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 });
 // Kakao 지도
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 6
-};
-var map = new kakao.maps.Map(mapContainer, mapOption);
+// var mapContainer = document.getElementById('map');
+// var mapOption = {
+//     center: new kakao.maps.LatLng(33.450701, 126.570667),
+//     level: 6
+// };
+// var map = new kakao.maps.Map(mapContainer, mapOption);
 function getAddress(address, name, map) {
     // 사용하려는 객체가 정의되어 있는지 확인
     if (kakao.maps.services && kakao.maps.services.Geocoder) {
