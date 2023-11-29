@@ -5,6 +5,7 @@ async function fetchData() {
         const data = await response.json();
         console.log(data);
         displayData(data);
+        initializeMap(data); // 데이터를 받은 후에 지도 초기화 함수 호출
     } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
     }
@@ -43,7 +44,7 @@ function loadKakaoMapsScript(callback) {
     document.head.appendChild(script);
 }
 
-function initializeMap() {
+function initializeMap(data) {
     // Load Kakao Maps script
     loadKakaoMapsScript(function() {
         var mapContainer = document.getElementById('map');
@@ -53,49 +54,44 @@ function initializeMap() {
         };      
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        // Sample data for markers
-        var markerData = [
-            { position: new kakao.maps.LatLng(33.450701, 126.570667), content: 'Marker 1' },
-            // Add more markers as needed
-        ];
-
         // Create markers and info windows
-        markerData.forEach(data => {
-            var marker = new kakao.maps.Marker({
-                position: data.position,
-                map: map
+        data.forEach(info => {
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder(); 
+  
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch(info.address, function (result, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+  
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+  
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: `<div style="width:200px;text-align:center;padding:6px 0;">${info.name}<br>${info.address}</div>`
+                    });
+  
+                    // 마커에 마우스오버 이벤트 추가
+                    kakao.maps.event.addListener(marker, 'mouseover', function () {
+                        infowindow.open(map, marker);
+                    });
+  
+                    // 마커에 마우스아웃 이벤트 추가
+                    kakao.maps.event.addListener(marker, 'mouseout', function () {
+                        infowindow.close();
+                    });
+                }
             });
-
-            var infowindow = new kakao.maps.InfoWindow({
-                content: data.content
-            });
-
-            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
         });
 
         // Set the bounds to make all markers visible
         var bounds = new kakao.maps.LatLngBounds();
-        markerData.forEach(data => bounds.extend(data.position));
+        data.forEach(info => bounds.extend(new kakao.maps.LatLng(info.latitude, info.longitude))); // 데이터에 좌표 정보가 있다면 사용
         map.setBounds(bounds);
     });
 }
-
-// Function to display info window on mouseover
-function makeOverListener(map, marker, infowindow) {
-    return function() {
-        infowindow.open(map, marker);
-    };
-}
-
-// Function to close info window on mouseout
-function makeOutListener(infowindow) {
-    return function() {
-        infowindow.close();
-    };
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    initializeMap();
-});
-
